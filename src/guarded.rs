@@ -59,7 +59,7 @@ where
 struct ResourceAndDestroyer<'alloc_cb, Resource, Destroyer> {
     resource: Resource,
     destroyer: Destroyer,
-    allocation_callbacks: Option<&'alloc_cb vk::AllocationCallbacks>,
+    allocation_callbacks: Option<&'alloc_cb vk::AllocationCallbacks<'alloc_cb>>,
 }
 
 impl<'alloc_cb, Resource, Destroyer> GuardedResource<'alloc_cb, Resource, Destroyer>
@@ -77,7 +77,7 @@ where
     pub unsafe fn new(
         resource: Resource,
         destroyer: Destroyer,
-        allocation_callbacks: Option<&'alloc_cb vk::AllocationCallbacks>,
+        allocation_callbacks: Option<&'alloc_cb vk::AllocationCallbacks<'alloc_cb>>,
     ) -> Self {
         Self(Some(ResourceAndDestroyer {
             resource,
@@ -95,7 +95,7 @@ where
     }
 
     /// Returns the allocation callbacks passed during construction.
-    pub fn allocation_callbacks(&self) -> Option<&'alloc_cb vk::AllocationCallbacks> {
+    pub fn allocation_callbacks(&self) -> Option<&'alloc_cb vk::AllocationCallbacks<'alloc_cb>> {
         self.0.as_ref().unwrap().allocation_callbacks
     }
 

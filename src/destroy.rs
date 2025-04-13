@@ -1,5 +1,7 @@
 use ash::{
-    extensions::{ext, khr, nv},
+    ext,
+    khr,
+    nv,
     vk,
 };
 
@@ -158,27 +160,27 @@ macro_rules! destroyable_ext {
 }
 
 destroyable_ext!(
-    khr::AccelerationStructure,
+    khr::acceleration_structure::Device,
     destroy_acceleration_structure,
     vk::AccelerationStructureKHR
 );
 destroyable_ext!(
-    nv::RayTracing,
+    nv::ray_tracing::Device,
     destroy_acceleration_structure,
     vk::AccelerationStructureNV
 );
 destroyable_ext!(
-    ext::DebugUtils,
+    ext::debug_utils::Instance,
     destroy_debug_utils_messenger,
     vk::DebugUtilsMessengerEXT
 );
 destroyable_ext!(
-    khr::DeferredHostOperations,
+    khr::deferred_host_operations::Device,
     destroy_deferred_operation,
     vk::DeferredOperationKHR
 );
-destroyable_ext!(khr::Surface, destroy_surface, vk::SurfaceKHR);
-destroyable_ext!(khr::Swapchain, destroy_swapchain, vk::SwapchainKHR);
+destroyable_ext!(khr::surface::Instance, destroy_surface, vk::SurfaceKHR);
+destroyable_ext!(khr::swapchain::Device, destroy_swapchain, vk::SwapchainKHR);
 
 // TODO: Figure out the following:
 //     CuFunctionNVX
